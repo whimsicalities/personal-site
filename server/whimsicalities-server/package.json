@@ -9,6 +9,7 @@
   },
   "author": "whimsicalities",
   "dependencies": {
+    "@types/node": "^20.14.7",
     "typescript": "^5.5.2"
   }
 }
