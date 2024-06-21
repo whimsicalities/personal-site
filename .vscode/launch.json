@@ -10,6 +10,13 @@
             "name": "Launch Server",
             "request": "launch",
             "program": "./server/whimsicalities-server/dist/server.js"
+        },
+        {
+            "type": "firefox",
+            "name": "Launch Client",
+            "preLaunchTask": "Serve Client",
+            "request": "launch",
+            "url": "http://localhost:4200/"
         }
     ]
 }
