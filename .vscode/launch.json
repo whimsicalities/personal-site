@@ -9,12 +9,15 @@
             "preLaunchTask": "Compile Server",
             "name": "Launch Server",
             "request": "launch",
-            "program": "./server/whimsicalities-server/dist/server.js"
+            "program": "./server/whimsicalities-server/dist/server.js",
+            "sourceMaps": true
         },
         {
-            "type": "firefox",
+            "type": "chrome",
             "name": "Launch Client",
-            "preLaunchTask": "Serve Client",
+            "preLaunchTask": "npm: start",
+            "cwd": "${workspaceFolder}/client/whimsicalities",
+            "webRoot": "${workspaceFolder}/client/whimsicalities",
             "request": "launch",
             "url": "http://localhost:4200/"
         }

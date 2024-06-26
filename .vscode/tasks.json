@@ -8,10 +8,9 @@
             "path": "./server/whimsicalities-server",
         },
         {
-            "label": "Serve Client",
             "type": "npm",
             "script": "start",
-            "path": "./client/whimsicalities",
+            "path": "/client/whimsicalities",
             "isBackground": true,
             "problemMatcher": {
                 "owner": "typescript",
