@@ -1,9 +1,14 @@
 import express from 'express'
+import cors from 'cors'
 
 const app = express();
-const port = 3000
+const port = 3000;
 
-app.get('/healthcheck', (req, res) => {
+const corsOptions = {
+  origin: 'http://localhost:4200',
+}
+
+app.get('/healthcheck', cors(corsOptions), (req, res) => {
   res.send(true);
 })
 

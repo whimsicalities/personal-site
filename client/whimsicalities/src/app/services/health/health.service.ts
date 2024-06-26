@@ -9,6 +9,6 @@ export class HealthService {
   constructor(private http: HttpClient) { }
 
   healthCheck(): Observable<boolean> {
-    return this.http.get<boolean>('localhost:3000/healthcheck')
+    return this.http.get<boolean>('http://localhost:3000/healthcheck')
   }
 }
