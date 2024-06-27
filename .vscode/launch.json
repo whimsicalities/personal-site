@@ -9,6 +9,9 @@
             "preLaunchTask": "Compile Server",
             "name": "Launch Server",
             "request": "launch",
+            "env": {
+                "environment": "local"
+            },
             "program": "./server/whimsicalities-server/dist/server.js",
             "sourceMaps": true
         },
