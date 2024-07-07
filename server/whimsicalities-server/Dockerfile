@@ -7,5 +7,6 @@ ENV environment test
 # Ensure that application files belong to node instead of root
 RUN npm install
 COPY --chown=node:node . .
+RUN npm run compile
 EXPOSE 8080
 CMD [ "node", "dist/server.js" ]
