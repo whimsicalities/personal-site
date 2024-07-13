@@ -5,15 +5,17 @@
 
 #title {
     font-family: miracode;
+    padding-right: 0.5em;
 }
 
 #whole-title {
     padding: 1em;
     display: flex;
-    justify-content: space-between;
     background-color: lightcoral;
+    align-items: center;
 }
 
 fa-icon {
     padding: 0.5em;
+    color: black;
 }
