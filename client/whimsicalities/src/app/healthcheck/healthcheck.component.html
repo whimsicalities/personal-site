@@ -1,4 +1,6 @@
-Hello world.
-<ng-container *ngIf="healthy$ | async as healthy">
-    Server is healthy!
+<ng-container *ngIf="(healthy$ | async) as healthy">
+    <div class="circle" id="healthy_circle"></div>
+</ng-container>
+<ng-container *ngIf="!(healthy$ | async) as healthy">
+    <div class="circle" id="unhealthy_circle"></div>
 </ng-container>
