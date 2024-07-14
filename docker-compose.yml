@@ -8,3 +8,17 @@ services:
       build: ./server/whimsicalities-server
       ports:
         - "3000:3000"
+      depends_on:
+        redis:
+          condition: service_healthy
+      links:
+        - redis
+    redis:
+      image: "redis:7.2.5"
+      ports:
+        - "6379:6379"
+      healthcheck:
+        test: ["CMD", "redis-cli", "ping"]
+        interval: 1s
+        timeout: 2s
+        retries: 10
