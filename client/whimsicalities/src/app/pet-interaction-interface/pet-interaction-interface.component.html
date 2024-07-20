@@ -1,1 +1,15 @@
-<p>pet-interaction-interface works!</p>
+<div id="whole-pet-interaction-interface">
+    <div>
+        <fa-icon [icon]="faAppleWhole"></fa-icon>
+        <app-stat-bar [BarPercentage]=foodBarPercentage></app-stat-bar>
+        <button type="button">Feed</button>
+    </div>
+    <div>
+        <fa-icon [icon]="faFaceLaughBeam"></fa-icon>
+        <app-stat-bar [BarPercentage]=playBarPercentage></app-stat-bar>
+        <button type="button">Play</button>
+    </div>
+    <div>
+        <fa-icon [icon]="faHeart"></fa-icon>
+    </div>
+</div>
