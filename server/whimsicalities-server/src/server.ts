@@ -31,7 +31,7 @@ const corsOptions: CorsOptions = {
 
 const connectToRedis = async (): Promise<WhimsicalitiesRedisClient> => {
   const redisClient = createClient({
-    url: 'redis://@redis:6379'
+    url: config.redisUrl,
   });
 
   redisClient.on('error', err => console.log('Redis Client Error', err));
