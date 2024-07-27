@@ -1,8 +1,11 @@
 import express from 'express'
-import cors from 'cors'
+import cors, { CorsOptions } from 'cors'
 import configs from './config/configs';
 import EnvironmentConfig from './config/EnvironmentConfig';
 import { createClient } from 'redis';
+import increaseStatRoute from './routes/stats/increaseStatRoute';
+import getStatRoute from './routes/stats/getStatRoute';
+import { WhimsicalitiesRedisClient } from './types/WhimsicalitiesRedisClient';
 
 let config: EnvironmentConfig;
 
@@ -22,29 +25,38 @@ switch (process.env.environment) {
 const app = express();
 const port = config.port;
 
-const corsOptions = {
+const corsOptions: CorsOptions = {
   origin: config.corsOrigin,
 }
 
-const connectToRedis = async () => {
-  const client = createClient({
+const connectToRedis = async (): Promise<WhimsicalitiesRedisClient> => {
+  const redisClient = createClient({
     url: 'redis://@redis:6379'
   });
 
-  client.on('error', err => console.log('Redis Client Error', err));
+  redisClient.on('error', err => console.log('Redis Client Error', err));
 
-  await client.connect();
+  await redisClient.connect();
 
-  await client.set('key', 'value');
-  const value = await client.get('key');
-  console.log(value);
+  // await redisClient.set('key', 'value');
+  // const value = await redisClient.get('key');
+  // console.log(value);
+
+  return redisClient;
 }
 
-app.get('/healthcheck', cors(corsOptions), (req, res) => {
-  res.send(true);
-})
-
-app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
-  connectToRedis();
-})
+connectToRedis().then(
+  (redisClient) => {
+    increaseStatRoute(app, corsOptions, redisClient);
+    getStatRoute(app, corsOptions, redisClient);
+    app.get('/healthcheck', cors(corsOptions), (req, res) => {
+      res.send(true);
+    });
+    app.listen(port, async () => {
+      console.log(`Server listening on port ${port}`);
+    });
+  },
+  (error) => {
+    console.log("Failed to start server. Error: " + error);
+  }
+)

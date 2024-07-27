@@ -7,7 +7,7 @@ const configs: EnvironmentsConfig = {
     },
     test: {
         port: 3000,
-        corsOrigin: "http://localhost:8080"
+        corsOrigin: "http://localhost:8080",
     },
 }
 
