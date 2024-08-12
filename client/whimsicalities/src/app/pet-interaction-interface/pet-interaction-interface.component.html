@@ -2,12 +2,13 @@
     <div>
         <fa-icon [icon]="faAppleWhole"></fa-icon>
         <app-stat-bar [BarPercentage]=foodBarPercentage></app-stat-bar>
-        <button type="button">Feed</button>
+        Food: {{ foodValue$ | async }}
+        <button type="button" (click)="feedClick()">Feed</button>
     </div>
     <div>
         <fa-icon [icon]="faFaceLaughBeam"></fa-icon>
         <app-stat-bar [BarPercentage]=playBarPercentage></app-stat-bar>
-        <button type="button">Play</button>
+        <button type="button" (click)="playClick()">Play</button>
     </div>
     <div>
         <fa-icon [icon]="faHeart"></fa-icon>

@@ -8,7 +8,7 @@ export default function getStatRoute(app: e.Express, corsOptions: CorsOptions, r
       const stat = req.params.stat;
       if (IsPetStat(stat)) {
         const value = await redisClient.get(stat);
-        res.send(value);
+        return res.send(value);
       }
       res.status(400).end("Not a valid stat");
     });

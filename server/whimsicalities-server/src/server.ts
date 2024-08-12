@@ -6,6 +6,7 @@ import { createClient } from 'redis';
 import increaseStatRoute from './routes/stats/increaseStatRoute';
 import getStatRoute from './routes/stats/getStatRoute';
 import { WhimsicalitiesRedisClient } from './types/WhimsicalitiesRedisClient';
+import { PetStat } from './PetStat';
 
 let config: EnvironmentConfig;
 
@@ -24,10 +25,13 @@ switch (process.env.environment) {
 
 const app = express();
 const port = config.port;
+app.use(express.json()); // For parsing JSON post bodies
 
 const corsOptions: CorsOptions = {
   origin: config.corsOrigin,
+  optionsSuccessStatus: 200,
 }
+app.options('*', cors(corsOptions)); // Configure CORS preflight OPTIONS response for all endpoints
 
 const connectToRedis = async (): Promise<WhimsicalitiesRedisClient> => {
   const redisClient = createClient({
@@ -41,6 +45,11 @@ const connectToRedis = async (): Promise<WhimsicalitiesRedisClient> => {
   // await redisClient.set('key', 'value');
   // const value = await redisClient.get('key');
   // console.log(value);
+
+  // Insert our initial testing values for pet stats
+  // Our redis keys are numeric but there is no number type so they must be strings
+  await redisClient.set(PetStat.Food.toString(), 50);
+  await redisClient.set(PetStat.Fun.toString(), 50);
 
   return redisClient;
 }
