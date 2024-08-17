@@ -12,6 +12,8 @@ export default function getStatRoute(app: e.Express, corsOptions: CorsOptions, r
       }
       const storedStat = await redisClient.hGetAll(stat);
       const decay = CalculateStatDecay(Number(storedStat.LastInteractionTime));
-      return res.send((Number(storedStat.ValueAtLastInteraction) - decay).toString());
+      let newValue = Number(storedStat.ValueAtLastInteraction) - decay;
+      newValue = Math.max(newValue, 0);
+      return res.send(newValue.toString()); // Value is not allowed to be a number or it is intepreted as a status code
     });
 };
