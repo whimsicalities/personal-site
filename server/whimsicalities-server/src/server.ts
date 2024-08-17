@@ -48,8 +48,12 @@ const connectToRedis = async (): Promise<WhimsicalitiesRedisClient> => {
 
   // Insert our initial testing values for pet stats
   // Our redis keys are numeric but there is no number type so they must be strings
-  await redisClient.set(PetStat.Food.toString(), 50);
-  await redisClient.set(PetStat.Fun.toString(), 50);
+  const initialValue = Object.entries({
+    LastInteractionTime: Date.now(),
+    ValueAtLastInteraction: 50,
+  });
+  await redisClient.hSet(PetStat.Food.toString(),initialValue);
+  await redisClient.hSet(PetStat.Fun.toString(), initialValue);
 
   return redisClient;
 }
