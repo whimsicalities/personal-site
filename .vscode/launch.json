@@ -24,5 +24,22 @@
             "request": "launch",
             "url": "http://localhost:4200/"
         }
+    ],
+    "compounds": [
+        {
+            "name": "Run client and server locally with docker redis",
+            "preLaunchTask": "compose-up-redis",
+            "configurations": [
+                "Launch Client",
+                "Launch Server"
+            ]
+        },
+        {
+            "name": "Run server locally with docker redis",
+            "preLaunchTask": "compose-up-redis",
+            "configurations": [
+                "Launch Server"
+            ]
+        }
     ]
 }

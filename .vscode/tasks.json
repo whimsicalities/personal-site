@@ -25,6 +25,33 @@
                     }
                 }
             }
+        },
+        {
+            "type": "shell",
+            "label": "compose-up-all",
+            "command": "docker compose up",
+            "presentation": {
+              "reveal": "always",
+              "panel": "new"
+            }
+        },
+        {
+            "type": "shell",
+            "label": "compose-up-redis",
+            "command": "docker compose up -d redis",
+            "presentation": {
+              "reveal": "always",
+              "panel": "new"
+            }
+        },
+        {
+            "type": "shell",
+            "label": "compose-down",
+            "command": "docker compose down",
+            "presentation": {
+              "reveal": "always",
+              "panel": "new"
+            }
         }
     ]
 }
