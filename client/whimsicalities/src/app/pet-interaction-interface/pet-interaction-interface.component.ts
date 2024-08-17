@@ -31,19 +31,28 @@ export class PetInteractionInterfaceComponent {
 
   foodValue$!: Observable<number>;
 
-  ngOnInit() {
+  private refreshValues(): void {
     this.updateFoodValue();
+    setTimeout( // Check for updates
+      () => this.refreshValues(),
+      10000
+    );
   }
 
-  updateFoodValue() {
+  ngOnInit(): void {
+    this.updateFoodValue();
+    this.refreshValues();
+  }
+
+  updateFoodValue(): void {
     this.foodValue$ = this.petStatService.getStat(PetStat.Food);
   }
 
-  getFunValue() {
+  getFunValue(): void {
     this.petStatService.getStat(PetStat.Fun);
   }
 
-  feedClick() {
+  feedClick(): void {
     this.petStatService.increaseStat(PetStat.Food)
       .subscribe({
         next: (v) => console.log(v),
@@ -52,7 +61,7 @@ export class PetInteractionInterfaceComponent {
       });
   }
 
-  playClick() {
+  playClick(): void {
     this.petStatService.increaseStat(PetStat.Fun);
   }
 }
