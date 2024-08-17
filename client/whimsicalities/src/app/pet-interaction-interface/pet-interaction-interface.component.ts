@@ -6,7 +6,7 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { StatBarComponent } from '../stat-bar/stat-bar.component';
 import { PetStat } from '../services/pet-stat/PetStat';
 import { PetStatService } from '../services/pet-stat/pet-stat.service';
-import { catchError, Observable, tap } from 'rxjs';
+import { Observable, } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 
 @Component({

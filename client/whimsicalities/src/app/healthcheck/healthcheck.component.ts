@@ -14,7 +14,15 @@ export class HealthcheckComponent {
   healthService = inject(HealthService);
   healthy$!: Observable<boolean>;
 
-  ngOnInit(): void {
+  private checkStatus(): void {
     this.healthy$ = this.healthService.healthCheck();
+    setTimeout(
+      () => this.checkStatus(),
+      10000
+    );
+  }
+
+  ngOnInit(): void {
+    this.checkStatus();
   }
 }
