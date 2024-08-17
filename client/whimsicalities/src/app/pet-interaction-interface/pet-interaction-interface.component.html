@@ -1,9 +1,8 @@
 <div id="whole-pet-interaction-interface">
     <div>
         <fa-icon [icon]="faAppleWhole"></fa-icon>
-        <app-stat-bar [BarPercentage]=foodBarPercentage></app-stat-bar>
-        Food: {{ foodValue$ | async }}
         <button type="button" (click)="feedClick()">Feed</button>
+        <app-stat-bar [BarPercentage]=foodBarPercentage></app-stat-bar>
     </div>
     <div>
         <fa-icon [icon]="faFaceLaughBeam"></fa-icon>

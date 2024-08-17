@@ -26,8 +26,8 @@ export class PetInteractionInterfaceComponent {
   faAppleWhole = faAppleWhole;
   faFaceLaughBeam = faFaceLaughBeam;
   faHeart = faHeart;
-  foodBarPercentage = 50;
-  playBarPercentage = 50;
+  foodBarPercentage = 100;
+  playBarPercentage = 100;
 
   foodValue$!: Observable<number>;
 
@@ -46,6 +46,11 @@ export class PetInteractionInterfaceComponent {
 
   updateFoodValue(): void {
     this.foodValue$ = this.petStatService.getStat(PetStat.Food);
+    this.foodValue$.subscribe(
+      (value) => {
+        this.foodBarPercentage = value
+      }
+    )
   }
 
   getFunValue(): void {
