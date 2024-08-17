@@ -29,7 +29,7 @@
         {
             "type": "shell",
             "label": "compose-up-all",
-            "command": "docker compose up",
+            "command": "docker compose up --build",
             "presentation": {
               "reveal": "always",
               "panel": "new"
@@ -38,7 +38,7 @@
         {
             "type": "shell",
             "label": "compose-up-redis",
-            "command": "docker compose up -d redis",
+            "command": "docker compose up -d --build redis",
             "presentation": {
               "reveal": "always",
               "panel": "new"
