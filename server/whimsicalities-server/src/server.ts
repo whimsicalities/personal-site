@@ -54,7 +54,7 @@ const connectToRedis = async (): Promise<WhimsicalitiesRedisClient> => {
   });
   const stats = [PetStat.Food.toString(), PetStat.Fun.toString()];
   for (const stat of stats) {
-    const exists = await redisClient.exists(PetStat.Food.toString());
+    const exists = await redisClient.exists(stat.toString());
     if (exists === 0) { // Should be 1 if exists
       await redisClient.hSet(stat, initialValue);
     }

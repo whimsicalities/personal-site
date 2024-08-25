@@ -22,7 +22,7 @@ export class PetStatService {
       { stat },
     ).pipe(
       tap((x) => {
-        console.log('Fed!')
+        console.log('Increased stat')
       }),
       catchError((error, caught) => {
         console.log(error);

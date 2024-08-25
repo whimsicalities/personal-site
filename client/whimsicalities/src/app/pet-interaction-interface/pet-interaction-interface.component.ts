@@ -27,12 +27,14 @@ export class PetInteractionInterfaceComponent {
   faFaceLaughBeam = faFaceLaughBeam;
   faHeart = faHeart;
   foodBarPercentage = 50;
-  playBarPercentage = 50;
+  funBarPercentage = 50;
 
   foodValue$!: Observable<number>;
+  funValue$!: Observable<number>;
 
   private refreshValues(): void {
     this.updateFoodValue();
+    this.updateFunValue();
     setTimeout( // Check for updates
       () => this.refreshValues(),
       10000
@@ -40,7 +42,6 @@ export class PetInteractionInterfaceComponent {
   }
 
   ngOnInit(): void {
-    this.updateFoodValue();
     this.refreshValues();
   }
 
@@ -53,8 +54,13 @@ export class PetInteractionInterfaceComponent {
     )
   }
 
-  getFunValue(): void {
-    this.petStatService.getStat(PetStat.Fun);
+  updateFunValue(): void {
+    this.funValue$ = this.petStatService.getStat(PetStat.Fun);
+    this.funValue$.subscribe(
+      (value) => {
+        this.funBarPercentage = value
+      }
+    )
   }
 
   feedClick(): void {
@@ -67,6 +73,11 @@ export class PetInteractionInterfaceComponent {
   }
 
   playClick(): void {
-    this.petStatService.increaseStat(PetStat.Fun);
+    this.petStatService.increaseStat(PetStat.Fun)
+      .subscribe({
+        next: (v) => console.log(v),
+        error: (error) => console.log(error),
+        complete: () => this.updateFunValue(),
+      });
   }
 }
