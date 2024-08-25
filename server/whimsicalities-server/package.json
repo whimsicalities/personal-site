@@ -1,7 +1,7 @@
 {
   "name": "whimsicalities-server",
   "version": "0.0.0",
-  "description": "Server for whimsicaliti.es",
+  "description": "Server for whimsicalities personal site",
   "main": "index.js",
   "scripts": {
     "compile": "tsc",
