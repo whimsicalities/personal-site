@@ -21,3 +21,8 @@ services:
         interval: 1s
         timeout: 2s
         retries: 10
+      volumes:
+        - redis_data:/data
+
+volumes:
+  redis_data:
