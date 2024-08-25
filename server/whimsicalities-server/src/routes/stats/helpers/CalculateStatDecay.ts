@@ -7,5 +7,5 @@
 export default function CalculateStatDecay(lastInteractionTime: number): number {
     const nowMs = Date.now();
     const timePassed = nowMs - lastInteractionTime;
-    return Math.floor(timePassed / 10000);
+    return Math.floor(timePassed / 60000);
 }
