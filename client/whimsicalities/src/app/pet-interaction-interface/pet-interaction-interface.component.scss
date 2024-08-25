@@ -6,3 +6,15 @@
 button {
     width: 100%;
 }
+
+.flex-container {
+    display: flex;
+}
+
+app-stat-bar {
+    flex-grow: 1
+}
+
+fa-icon, app-stat-bar, .button-container {
+    padding: 0.25em;
+}
