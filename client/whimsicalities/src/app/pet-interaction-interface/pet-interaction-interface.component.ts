@@ -26,8 +26,8 @@ export class PetInteractionInterfaceComponent {
   faAppleWhole = faAppleWhole;
   faFaceLaughBeam = faFaceLaughBeam;
   faHeart = faHeart;
-  foodBarPercentage = 100;
-  playBarPercentage = 100;
+  foodBarPercentage = 50;
+  playBarPercentage = 50;
 
   foodValue$!: Observable<number>;
 

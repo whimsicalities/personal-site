@@ -15,5 +15,18 @@
 }
 
 .content {
-    grid-area: content
+    grid-area: content;
+}
+
+.flex-container {
+    display: flex;
+}
+
+#pet-interaction-interface {
+    flex: 1;
+    padding: 2em;
+}
+
+#pet {
+    flex: 6;
 }
