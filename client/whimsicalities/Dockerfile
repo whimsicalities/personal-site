@@ -1,6 +1,6 @@
 # Multi stage dockerfile to build angular app and then serve it with nginx
 
-FROM node:20-alpine as build
+FROM node:20-alpine AS build
 RUN mkdir /home/node/app
 WORKDIR /home/node/app
 COPY . .
