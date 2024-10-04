@@ -19,6 +19,10 @@ switch (process.env.environment) {
     config = configs.test;
     break;
   }
+  case "production": {
+    config = configs.prod;
+    break;
+  }
   default:
     throw new Error(`Unsupported environment ${process.env.environment}`);
 }

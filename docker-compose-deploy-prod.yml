@@ -1,10 +1,11 @@
+# Pull images from repository and deploy. Used for actual deployment to the server.
 services:
     client:
-        build: ./client/whimsicalities
-        ports:
-            - "8080:80"
+      image: "whimsicalities/personal-site:whimsicalities-client"
+      ports:
+        - "80:80"
     server:
-      build: ./server/whimsicalities-server
+      image: "whimsicalities/personal-site:whimsicalities-server"
       ports:
         - "3000:3000"
       depends_on:
@@ -14,8 +15,7 @@ services:
         - redis
     redis:
       image: "redis:7.2.5"
-      ports:
-        - "6379:6379"
+      # Redis ports aren't exposed
       healthcheck:
         test: ["CMD", "redis-cli", "ping"]
         interval: 1s

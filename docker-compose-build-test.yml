@@ -1,0 +1,27 @@
+# Build code and deploy for testing purposes
+services:
+    client:
+      build: ./client/whimsicalities
+      ports:
+        - "8080:80"
+    server:
+      build: ./server/whimsicalities-server
+      ports:
+        - "3000:3000"
+      depends_on:
+        redis:
+          condition: service_healthy
+      links:
+        - redis
+    redis:
+      image: "redis:7.2.5"
+      healthcheck:
+        test: ["CMD", "redis-cli", "ping"]
+        interval: 1s
+        timeout: 2s
+        retries: 10
+      volumes:
+        - redis_data:/data
+
+volumes:
+  redis_data:

@@ -29,7 +29,7 @@
         {
             "type": "shell",
             "label": "compose-up-all",
-            "command": "docker compose up --build",
+            "command": "docker compose -f docker-compose-build-test.yml up --build",
             "presentation": {
               "reveal": "always",
               "panel": "new"
@@ -38,7 +38,7 @@
         {
             "type": "shell",
             "label": "compose-up-redis",
-            "command": "docker compose up -d --build redis",
+            "command": "docker compose -f docker-compose-build-test.yml up -d --build redis",
             "presentation": {
               "reveal": "always",
               "panel": "new"
@@ -47,7 +47,7 @@
         {
             "type": "shell",
             "label": "compose-down",
-            "command": "docker compose down",
+            "command": "docker compose -f docker-compose-build-test.yml down",
             "presentation": {
               "reveal": "always",
               "panel": "new"
