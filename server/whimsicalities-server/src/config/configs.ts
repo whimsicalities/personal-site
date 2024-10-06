@@ -11,6 +11,11 @@ const configs: EnvironmentsConfig = {
         corsOrigin: "http://localhost:8080",
         redisUrl: "redis://@redis:6379",
     },
+    prod: {
+        port: 3000,
+        corsOrigin: "[redacted]",
+        redisUrl: "redis://@redis:6379",
+    }
 }
 
 export default configs;
