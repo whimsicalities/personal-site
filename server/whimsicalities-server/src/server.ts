@@ -58,10 +58,6 @@ const connectToRedis = async (): Promise<WhimsicalitiesRedisClient> => {
 
   await redisClient.connect();
 
-  // await redisClient.set('key', 'value');
-  // const value = await redisClient.get('key');
-  // console.log(value);
-
   // Initial values for stats
   // Our redis keys are numeric but there is no number type so they must be strings
   const initialValue = Object.entries({
@@ -81,8 +77,8 @@ const connectToRedis = async (): Promise<WhimsicalitiesRedisClient> => {
 connectToRedis().then(
   (redisClient) => {
     // Set up routes
-    increaseStatRoute(app, io, corsOptions, redisClient);
-    getStatRoute(app, corsOptions, redisClient);
+    increaseStatRoute(app, io, corsOptions, redisClient, config.decaySpeedSeconds);
+    getStatRoute(app, corsOptions, redisClient, config.decaySpeedSeconds);
     app.get('/healthcheck', cors(corsOptions), (req, res) => {
       res.send(true);
     });

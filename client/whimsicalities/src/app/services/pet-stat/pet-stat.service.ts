@@ -17,9 +17,12 @@ export class PetStatService {
   }
 
   increaseStat(stat: PetStat): Observable<any> {
-    return this.http.post<object>(
+    return this.http.post(
       this.urlBase + '/increase',
       { stat },
+      {
+        responseType: 'text'
+      }
     ).pipe(
       tap((x) => {
         console.log('Increased stat')
