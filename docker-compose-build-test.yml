@@ -15,6 +15,8 @@ services:
         - redis
     redis:
       image: "redis:7.2.5"
+      ports:
+        - "6379:6379" # This is exposed so that the client and server can be run locally outside of containers
       healthcheck:
         test: ["CMD", "redis-cli", "ping"]
         interval: 1s
