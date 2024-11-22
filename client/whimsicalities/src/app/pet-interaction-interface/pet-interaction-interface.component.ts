@@ -7,7 +7,8 @@ import { StatBarComponent } from '../stat-bar/stat-bar.component';
 import { PetStat } from '../services/pet-stat/PetStat';
 import { PetStatService } from '../services/pet-stat/pet-stat.service';
 import { Observable, } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
+import { io } from 'socket.io-client';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-pet-interaction-interface',
@@ -15,7 +16,6 @@ import { AsyncPipe } from '@angular/common';
   imports: [
     FontAwesomeModule,
     StatBarComponent,
-    AsyncPipe,
   ],
   templateUrl: './pet-interaction-interface.component.html',
   styleUrl: './pet-interaction-interface.component.scss'
@@ -32,17 +32,30 @@ export class PetInteractionInterfaceComponent {
   foodValue$!: Observable<number>;
   funValue$!: Observable<number>;
 
+  /**
+   * Retrieve current values with a request
+   */
   private refreshValues(): void {
     this.updateFoodValue();
     this.updateFunValue();
-    setTimeout( // Check for updates
-      () => this.refreshValues(),
-      10000
-    );
+  }
+
+  /**
+   * Websocket connection to recieve updates
+   */
+  socketConnect(): void {
+    const socket = io(environment.serverUrl);
+    socket.on(PetStat.Food.toString(), (newValue) => {
+      this.foodBarPercentage = newValue;
+    })
+    socket.on(PetStat.Fun.toString(), (newValue) => {
+      this.funBarPercentage = newValue;
+    })
   }
 
   ngOnInit(): void {
-    this.refreshValues();
+    this.refreshValues(); // Get the initial values with a request
+    this.socketConnect();
   }
 
   updateFoodValue(): void {

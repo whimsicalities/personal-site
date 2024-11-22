@@ -1,5 +1,7 @@
 import express from 'express'
+const { createServer } = require('node:http');
 import cors, { CorsOptions } from 'cors'
+import { Server } from 'socket.io';
 import configs from './config/configs';
 import EnvironmentConfig from './config/EnvironmentConfig';
 import { createClient } from 'redis';
@@ -28,6 +30,16 @@ switch (process.env.environment) {
 }
 
 const app = express();
+// Creating the server ourselves rather than letting express create it
+// will let us also run the websocket on the same port
+const server = createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: config.corsOrigin,
+    methods: ["GET", "POST"]
+  }
+});
+
 const port = config.port;
 app.use(express.json()); // For parsing JSON post bodies
 
@@ -68,12 +80,13 @@ const connectToRedis = async (): Promise<WhimsicalitiesRedisClient> => {
 
 connectToRedis().then(
   (redisClient) => {
-    increaseStatRoute(app, corsOptions, redisClient);
+    // Set up routes
+    increaseStatRoute(app, io, corsOptions, redisClient);
     getStatRoute(app, corsOptions, redisClient);
     app.get('/healthcheck', cors(corsOptions), (req, res) => {
       res.send(true);
     });
-    app.listen(port, async () => {
+    server.listen(port, async () => {
       console.log(`Server listening on port ${port}`);
     });
   },
