@@ -12,7 +12,7 @@
             "env": {
                 "environment": "local"
             },
-            "program": "./server/whimsicalities-server/dist/server.js",
+            "program": "./server/whimsicalities-server/dist/src/server.js",
             "sourceMaps": true
         },
         {

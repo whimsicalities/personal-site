@@ -8,7 +8,8 @@ import { createClient } from 'redis';
 import increaseStatRoute from './routes/stats/increaseStatRoute';
 import getStatRoute from './routes/stats/getStatRoute';
 import { WhimsicalitiesRedisClient } from './types/WhimsicalitiesRedisClient';
-import { PetStat } from './PetStat';
+import { PET_STATS } from './PET_STATS';
+import doStatDecayForever from './tasks/doStatDecayForever';
 
 let config: EnvironmentConfig;
 
@@ -58,17 +59,12 @@ const connectToRedis = async (): Promise<WhimsicalitiesRedisClient> => {
 
   await redisClient.connect();
 
-  // Initial values for stats
-  // Our redis keys are numeric but there is no number type so they must be strings
-  const initialValue = Object.entries({
-    LastInteractionTime: Date.now(),
-    ValueAtLastInteraction: 50,
-  });
-  const stats = [PetStat.Food.toString(), PetStat.Fun.toString()];
-  for (const stat of stats) {
-    const exists = await redisClient.exists(stat.toString());
+  // Check that stats exist, and set to initial value if not
+  const initialValue = 50;
+  for (const stat of PET_STATS) {
+    const exists = await redisClient.exists(stat);
     if (exists === 0) { // Should be 1 if exists
-      await redisClient.hSet(stat, initialValue);
+      await redisClient.set(stat, initialValue);
     }
   }
   return redisClient;
@@ -76,9 +72,11 @@ const connectToRedis = async (): Promise<WhimsicalitiesRedisClient> => {
 
 connectToRedis().then(
   (redisClient) => {
+    doStatDecayForever(config.decaySpeedSeconds, redisClient, io);
+
     // Set up routes
-    increaseStatRoute(app, io, corsOptions, redisClient, config.decaySpeedSeconds);
-    getStatRoute(app, corsOptions, redisClient, config.decaySpeedSeconds);
+    increaseStatRoute(app, io, corsOptions, redisClient);
+    getStatRoute(app, corsOptions, redisClient);
     app.get('/healthcheck', cors(corsOptions), (req, res) => {
       res.send(true);
     });

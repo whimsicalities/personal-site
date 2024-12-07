@@ -13,13 +13,13 @@ export class PetStatService {
   constructor(private http: HttpClient) {}
 
   getStat(stat: PetStat): Observable<number> {
-    return this.http.get<number>(this.urlBase + '/' + stat);
+    return this.http.get<number>(this.urlBase + '/' + PetStat[stat]);
   }
 
   increaseStat(stat: PetStat): Observable<any> {
     return this.http.post(
       this.urlBase + '/increase',
-      { stat },
+      { stat: PetStat[stat] },
       {
         responseType: 'text'
       }

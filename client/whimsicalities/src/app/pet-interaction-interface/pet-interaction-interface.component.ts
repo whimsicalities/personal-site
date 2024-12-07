@@ -45,10 +45,10 @@ export class PetInteractionInterfaceComponent {
    */
   socketConnect(): void {
     const socket = io(environment.serverUrl);
-    socket.on(PetStat.Food.toString(), (newValue) => {
+    socket.on(PetStat[PetStat.Food], (newValue) => {
       this.foodBarPercentage = newValue;
     })
-    socket.on(PetStat.Fun.toString(), (newValue) => {
+    socket.on(PetStat[PetStat.Fun], (newValue) => {
       this.funBarPercentage = newValue;
     })
   }

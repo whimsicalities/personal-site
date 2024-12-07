@@ -1,12 +1,8 @@
-import { PetStat } from "../../../PetStat";
+import { PET_STATS } from "../../../PET_STATS";
 
 /**
- * Checks whether the given stat value (eg '1') is a part of
- * the PetStat enum when converted to a number.
+ * Checks if the stat is a valid, existing stat
  */
 export default function IsPetStat(stat: string): boolean {
-    if (Object.values(PetStat).includes(parseInt(stat))) {
-      return true;
-    }
-    return false;
+    return PET_STATS.includes(stat);
 }

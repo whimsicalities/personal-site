@@ -2,15 +2,13 @@ import cors, { CorsOptions } from "cors";
 import { WhimsicalitiesRedisClient } from "../../types/WhimsicalitiesRedisClient";
 import e from 'express';
 import IsPetStat from "./helpers/IsPetStat";
-import CalculateStatDecay from "./helpers/CalculateStatDecay";
-import { DefaultEventsMap, Server } from 'socket.io';
+import { WhimsicalitiesIo } from "../../types/WhimsicalitiesIo";
 
 export default function increaseStatRoute(
   app: e.Express,
-  io: Server<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, any>,
+  io: WhimsicalitiesIo,
   corsOptions: CorsOptions,
   redisClient: WhimsicalitiesRedisClient,
-  decaySpeedSeconds: number,
 ) {
     app.post('/stats/increase', cors(corsOptions), async (req, res) => {
       let stat = req.body?.stat;
@@ -19,17 +17,15 @@ export default function increaseStatRoute(
       if (!IsPetStat(stat)) {
         return res.status(400).end("Not a valid stat");
       }
-      const statRecord = await redisClient.hGetAll(stat);
-      const statDecay = CalculateStatDecay(Number(statRecord.LastInteractionTime), decaySpeedSeconds);
-      const oldStatValue = Number(statRecord.ValueAtLastInteraction);
-      let newStatValue = Math.max(oldStatValue - statDecay, 0);
-      if (newStatValue < 100) {
-        newStatValue += 1;
+      try {
+        const statValue = Number(await redisClient.get(stat));
+        if (statValue < 100) {
+            await redisClient.incr(stat);
+        }
+        io.emit(stat, statValue + 1);
+      } catch (e) {
+        console.log(`Failed to decrement stat ${stat}`);
       }
-      statRecord.ValueAtLastInteraction = (newStatValue).toString();
-      statRecord.LastInteractionTime = Date.now().toString();
-      io.emit(stat, newStatValue)
-      await redisClient.hSet(stat, statRecord);
 
       return res.sendStatus(200);
     });
