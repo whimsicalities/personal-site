@@ -1,4 +1,4 @@
-import { assert, expect, test } from 'vitest'
+import { expect, test } from 'vitest'
 import IsPetStat from '../../../../src/routes/stats/helpers/IsPetStat'
 
 test('With correct stat', () => {

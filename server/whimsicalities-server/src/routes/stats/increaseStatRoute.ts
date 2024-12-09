@@ -24,7 +24,8 @@ export default function increaseStatRoute(
         }
         io.emit(stat, statValue + 1);
       } catch (e) {
-        console.log(`Failed to decrement stat ${stat}`);
+        console.log(`Failed to decrement stat ${stat}. Error ${e}`);
+        return res.sendStatus(500);
       }
 
       return res.sendStatus(200);

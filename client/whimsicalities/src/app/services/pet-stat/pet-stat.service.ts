@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, of, tap } from 'rxjs';
 import { PetStat } from './PetStat';
@@ -16,7 +16,7 @@ export class PetStatService {
     return this.http.get<number>(this.urlBase + '/' + PetStat[stat]);
   }
 
-  increaseStat(stat: PetStat): Observable<any> {
+  increaseStat(stat: PetStat): Observable<string> {
     return this.http.post(
       this.urlBase + '/increase',
       { stat: PetStat[stat] },
@@ -24,10 +24,10 @@ export class PetStatService {
         responseType: 'text'
       }
     ).pipe(
-      tap((x) => {
+      tap(() => {
         console.log('Increased stat')
       }),
-      catchError((error, caught) => {
+      catchError((error) => {
         console.log(error);
         return of();
       })

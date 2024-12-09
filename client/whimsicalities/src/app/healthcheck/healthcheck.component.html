@@ -5,7 +5,7 @@
             <div>Connected</div>
         </div>
     </ng-container>
-    <ng-container *ngIf="!(healthy$ | async) as healthy">
+    <ng-container *ngIf="((healthy$ | async) === false) as healthy">
         <div class="connected-indicator-with-text">
             <div class="circle" id="unhealthy_circle"></div>
             <div>Not Connected</div>

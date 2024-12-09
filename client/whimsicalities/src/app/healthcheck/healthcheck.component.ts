@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { HealthService } from '../services/health/health.service';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { Observable } from 'rxjs';
@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
   templateUrl: './healthcheck.component.html',
   styleUrl: './healthcheck.component.scss'
 })
-export class HealthcheckComponent {
+export class HealthcheckComponent implements OnInit {
   healthService = inject(HealthService);
   healthy$!: Observable<boolean>;
 

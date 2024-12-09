@@ -1,5 +1,5 @@
 import express from 'express'
-const { createServer } = require('node:http');
+import { createServer } from 'http';
 import cors, { CorsOptions } from 'cors'
 import { Server } from 'socket.io';
 import configs from './config/configs';

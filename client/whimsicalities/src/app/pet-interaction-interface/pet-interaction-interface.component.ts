@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faAppleWhole } from '@fortawesome/free-solid-svg-icons';
 import { faFaceLaughBeam } from '@fortawesome/free-solid-svg-icons';
@@ -20,7 +20,7 @@ import { environment } from '../../environments/environment';
   templateUrl: './pet-interaction-interface.component.html',
   styleUrl: './pet-interaction-interface.component.scss'
 })
-export class PetInteractionInterfaceComponent {
+export class PetInteractionInterfaceComponent implements OnInit {
   private petStatService = inject(PetStatService);
 
   faAppleWhole = faAppleWhole;
