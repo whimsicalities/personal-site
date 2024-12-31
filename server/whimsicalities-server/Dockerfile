@@ -16,4 +16,4 @@ RUN npm install
 COPY --chown=node:node src ./src/
 COPY --chown=node:node tsconfig.json ./
 RUN npm run compile
-CMD [ "node", "dist/server.js" ]
+CMD [ "node", "dist/src/server.js" ]
