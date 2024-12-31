@@ -20,9 +20,9 @@ export default function increaseStatRoute(
       try {
         const statValue = Number(await redisClient.get(stat));
         if (statValue < 100) {
-            await redisClient.incr(stat);
+          await redisClient.incr(stat);
+          io.emit(stat, statValue + 1);
         }
-        io.emit(stat, statValue + 1);
       } catch (e) {
         console.log(`Failed to decrement stat ${stat}. Error ${e}`);
         return res.sendStatus(500);
