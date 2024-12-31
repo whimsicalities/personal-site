@@ -14,12 +14,13 @@ export default async function doStatDecayForever(
     await timeout(decaySpeedSeconds * 1000);
     for (const stat of PET_STATS) {
         try {
-            // TODO risk of concurrency problems
+            // TODO risk of concurrency problems?
             const value = Number(await redisClient.get(stat));
             if (value > 0) { // Min 0
                 await redisClient.decr(stat);
+                io.emit(stat, value - 1);
+                console.log(`Decremented stat to ${value - 1}`);
             }
-            io.emit(stat, value + 1)
         } catch (e) {
             console.log(`Failed to decrement stat ${stat}`);
             throw e;

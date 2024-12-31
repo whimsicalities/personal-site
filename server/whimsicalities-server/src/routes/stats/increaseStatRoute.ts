@@ -22,6 +22,7 @@ export default function increaseStatRoute(
         if (statValue < 100) {
           await redisClient.incr(stat);
           io.emit(stat, statValue + 1);
+          console.log(`Increased stat to ${statValue + 1}`);
         }
       } catch (e) {
         console.log(`Failed to decrement stat ${stat}. Error ${e}`);

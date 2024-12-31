@@ -47,10 +47,12 @@ export class PetInteractionInterfaceComponent implements OnInit {
     const socket = io(environment.serverUrl);
     socket.on(PetStat[PetStat.Food], (newValue) => {
       this.foodBarPercentage = newValue;
-    })
+      console.log(`Recieved ${newValue} from food websocket`);
+    });
     socket.on(PetStat[PetStat.Fun], (newValue) => {
       this.funBarPercentage = newValue;
-    })
+      console.log(`Recieved ${newValue} from fun websocket`);
+    });
   }
 
   ngOnInit(): void {
@@ -62,9 +64,9 @@ export class PetInteractionInterfaceComponent implements OnInit {
     this.foodValue$ = this.petStatService.getStat(PetStat.Food);
     this.foodValue$.subscribe(
       (value) => {
-        this.foodBarPercentage = value
+        this.foodBarPercentage = value;
       }
-    )
+    );
   }
 
   updateFunValue(): void {
