@@ -1,7 +1,7 @@
 import cors, { CorsOptions } from "cors";
 import { WhimsicalitiesRedisClient } from "../../types/WhimsicalitiesRedisClient";
 import e from 'express';
-import IsPetStat from "./helpers/IsPetStat";
+import isPetStat from "./helpers/isPetStat";
 import { WhimsicalitiesIo } from "../../types/WhimsicalitiesIo";
 
 export default function increaseStatRoute(
@@ -14,7 +14,7 @@ export default function increaseStatRoute(
       let stat = req.body?.stat;
       // Stat ought to be a number, which needs to be stringified to use as a redis key
       stat = stat.toString();
-      if (!IsPetStat(stat)) {
+      if (!isPetStat(stat)) {
         return res.status(400).end("Not a valid stat");
       }
       try {

@@ -1,7 +1,7 @@
 import cors, { CorsOptions } from "cors";
 import { WhimsicalitiesRedisClient } from "../../types/WhimsicalitiesRedisClient";
 import e from 'express';
-import IsPetStat from "./helpers/IsPetStat";
+import isPetStat from "./helpers/isPetStat";
 
 export default function getStatRoute(
   app: e.Express,
@@ -10,7 +10,7 @@ export default function getStatRoute(
 ) {
     app.get('/stats/:stat', cors(corsOptions), async (req, res) => {
       const stat = req.params.stat;
-      if (!IsPetStat(stat)) {
+      if (!isPetStat(stat)) {
         return res.status(400).end("Not a valid stat");
       }
       const statValue = await redisClient.get(stat);

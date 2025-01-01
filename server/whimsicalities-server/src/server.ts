@@ -9,7 +9,7 @@ import increaseStatRoute from './routes/stats/increaseStatRoute';
 import getStatRoute from './routes/stats/getStatRoute';
 import { WhimsicalitiesRedisClient } from './types/WhimsicalitiesRedisClient';
 import { PET_STATS } from './PET_STATS';
-import doStatDecayForever from './tasks/doStatDecayForever';
+import doStatDecayForever from './statDecay/doStatDecayForever';
 
 let config: EnvironmentConfig;
 
