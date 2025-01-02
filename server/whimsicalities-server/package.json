@@ -8,9 +8,13 @@
     "test": "vitest"
   },
   "author": "whimsicalities",
+  "engines": {
+    "node": "^22.12.0"
+  },
   "dependencies": {
     "@types/cors": "^2.8.17",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
     "express": "^4.19.2",
     "redis": "^4.6.15",
     "socket.io": "^4.8.1",

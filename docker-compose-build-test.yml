@@ -1,4 +1,4 @@
-# Build code and deploy for testing purposes
+# Build images and run for development/testing purposes
 services:
     client:
       build: ./client/whimsicalities
@@ -13,6 +13,11 @@ services:
           condition: service_healthy
       links:
         - redis
+      environment:
+        SECRETS_PATH: "/run/secrets/secrets.json"
+      secrets:
+        - source: secrets_json
+          target: "secrets.json"
     redis:
       image: "redis:7.2.5"
       ports:
@@ -27,3 +32,7 @@ services:
 
 volumes:
   redis_data:
+
+secrets:
+  secrets_json:
+    file: ./secrets/test.secrets.json

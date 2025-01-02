@@ -13,6 +13,11 @@ services:
           condition: service_healthy
       links:
         - redis
+      environment:
+        SECRETS_PATH: "/run/secrets/secrets.json" # A file will be created that contains the secrets
+      secrets:
+        - source: secrets_json
+          target: "secrets.json" # Create the secrets file with this name
     redis:
       image: "redis:7.2.5"
       # Redis ports aren't exposed
@@ -26,3 +31,7 @@ services:
 
 volumes:
   redis_data:
+
+secrets:
+  secrets_json:
+    file: ./secrets/production.secrets.json

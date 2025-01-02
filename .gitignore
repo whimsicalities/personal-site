@@ -14,3 +14,9 @@
 # System files
 **/**/.DS_Store
 **/**/Thumbs.db
+
+# Secrets folder
+secrets
+
+# Local env
+.env
