@@ -15,6 +15,9 @@ services:
         - redis
       environment:
         SECRETS_PATH: "/run/secrets/secrets.json" # A file will be created that contains the secrets
+        PORT: 3000
+        REDIS_URL: "redis://@redis:6379"
+        DECAY_SPEED_SECONDS: 3600
       secrets:
         - source: secrets_json
           target: "secrets.json" # Create the secrets file with this name

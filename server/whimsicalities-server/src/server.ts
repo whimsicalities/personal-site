@@ -2,8 +2,6 @@ import express from 'express';
 import { createServer } from 'http';
 import cors, { CorsOptions } from 'cors';
 import { Server } from 'socket.io';
-import configs from './config/configs';
-import EnvironmentConfig from './config/EnvironmentConfig';
 import { createClient } from 'redis';
 import increaseStatRoute from './routes/stats/increaseStatRoute';
 import getStatRoute from './routes/stats/getStatRoute';
@@ -11,28 +9,11 @@ import { WhimsicalitiesRedisClient } from './types/WhimsicalitiesRedisClient';
 import { PET_STATS } from './PET_STATS';
 import doStatDecayForever from './statDecay/doStatDecayForever';
 import readSecrets from './config/readSecrets';
+import loadEnvironmentConfig from './config/loadEnvironmentConfig';
 import { exit } from 'process';
 
 const main = async () => {
-  let config: EnvironmentConfig;
-
-  switch (process.env.environment) {
-    case "local": {
-      config = configs.local;
-      break;
-    }
-    case "test": {
-      config = configs.test;
-      break;
-    }
-    case "production": {
-      config = configs.prod;
-      break;
-    }
-    default:
-      throw new Error(`Unsupported environment ${process.env.environment}`);
-  }
-
+  const config = loadEnvironmentConfig();
   const secrets = await readSecrets();
 
   const app = express();

@@ -15,6 +15,9 @@ services:
         - redis
       environment:
         SECRETS_PATH: "/run/secrets/secrets.json"
+        PORT: 3000
+        REDIS_URL: "redis://@redis:6379"
+        DECAY_SPEED_SECONDS: 60
       secrets:
         - source: secrets_json
           target: "secrets.json"

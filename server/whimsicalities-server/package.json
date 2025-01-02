@@ -9,7 +9,7 @@
   },
   "author": "whimsicalities",
   "engines": {
-    "node": "^22.12.0"
+    "node": ">=20.14.0"
   },
   "dependencies": {
     "@types/cors": "^2.8.17",
