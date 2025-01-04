@@ -29,6 +29,11 @@
     flex: 6;
 }
 
+#interaction-log {
+    flex: 2;
+    min-width: 10em;
+}
+
 hr.solid {
     border-top: 3px solid black;
 }

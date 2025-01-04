@@ -1,1 +1,5 @@
-<p>interaction-log works!</p>
+<div id="whole-interaction-log">
+    @for (log of logs; track log.uuid) {
+        <app-log [log]=log></app-log>
+    }
+</div>

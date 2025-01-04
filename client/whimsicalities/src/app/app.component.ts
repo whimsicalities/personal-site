@@ -4,6 +4,7 @@ import { HealthcheckComponent } from './healthcheck/healthcheck.component';
 import { PetComponent } from './pet/pet.component';
 import { TitleComponent } from './title/title.component';
 import { PetInteractionInterfaceComponent } from './pet-interaction-interface/pet-interaction-interface.component';
+import { InteractionLogComponent } from "./interaction-log/interaction-log.component";
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,8 @@ import { PetInteractionInterfaceComponent } from './pet-interaction-interface/pe
     PetComponent,
     TitleComponent,
     PetInteractionInterfaceComponent,
-  ],
+    InteractionLogComponent
+],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
