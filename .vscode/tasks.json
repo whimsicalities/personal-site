@@ -37,8 +37,8 @@
         },
         {
             "type": "shell",
-            "label": "compose-up-redis",
-            "command": "docker compose -f docker-compose-build-test.yml up -d --build redis",
+            "label": "compose-up-dbs",
+            "command": "docker compose -f docker-compose-build-test.yml up -d --build redis postgres postgres-adminer",
             "presentation": {
               "reveal": "always",
               "panel": "new"

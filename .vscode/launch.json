@@ -27,16 +27,16 @@
     ],
     "compounds": [
         {
-            "name": "Run client and server locally with docker redis",
-            "preLaunchTask": "compose-up-redis",
+            "name": "Run client and server locally with docker databases",
+            "preLaunchTask": "compose-up-dbs",
             "configurations": [
                 "Launch Client",
                 "Launch Server"
             ]
         },
         {
-            "name": "Run server locally with docker redis",
-            "preLaunchTask": "compose-up-redis",
+            "name": "Run server locally with docker databases",
+            "preLaunchTask": "compose-up-dbs",
             "configurations": [
                 "Launch Server"
             ]
