@@ -1,0 +1,1 @@
+ALTER TABLE "interactionlog" ALTER COLUMN "time" SET DEFAULT now();
