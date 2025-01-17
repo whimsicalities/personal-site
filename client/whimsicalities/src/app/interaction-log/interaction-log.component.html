@@ -1,5 +1,5 @@
 <div id="whole-interaction-log">
-    @for (log of logs; track log.uuid) {
+    @for (log of logs; track log.log_id) {
         <app-log [log]=log></app-log>
     }
 </div>

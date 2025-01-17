@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import Log from '../Log';
+import InteractionLog from '../InteractionLog';
 
 @Component({
   selector: 'app-log',
@@ -9,5 +9,5 @@ import Log from '../Log';
   styleUrl: './log.component.scss'
 })
 export class LogComponent {
-  @Input({ required: true }) log!: Log; // Required, so never null (!)
+  @Input({ required: true }) log!: InteractionLog; // Required, so never null (!)
 }

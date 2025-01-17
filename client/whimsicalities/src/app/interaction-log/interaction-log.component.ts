@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import Log from './Log';
+import { Component, inject, OnInit } from '@angular/core';
+import InteractionLog from './InteractionLog';
 import { LogComponent } from './log/log.component';
+import { Observable } from 'rxjs';
+import { InteractionLogService } from '../services/interaction-log/interaction-log.service';
 
 @Component({
   selector: 'app-interaction-log',
@@ -12,14 +14,17 @@ import { LogComponent } from './log/log.component';
   styleUrl: './interaction-log.component.scss'
 })
 export class InteractionLogComponent implements OnInit {
-  logs: Log[] = new Array<Log>();
+  private interactionLogService = inject(InteractionLogService);
+
+  interactions$!: Observable<InteractionLog[]>;
+
+  logs: InteractionLog[] = new Array<InteractionLog>();
   ngOnInit(): void {
-    for (let i=0; i<10; i++) {
-      this.logs.push({
-        date: Date.now(),
-        uuid: crypto.randomUUID(), // TODO This is no good on production since the site is not https but it will do for prototyping
-        message: "Someone did something"
-      });
-    }
+    this.interactions$ = this.interactionLogService.getInteractionLog();
+    this.interactions$.subscribe(
+      (value) => {
+        this.logs = value;
+      }
+    );
   }
 }
