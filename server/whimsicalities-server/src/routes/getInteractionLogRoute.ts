@@ -13,7 +13,7 @@ export default function getInteractionLogRoute(
 
         // Get the most recent 5 interactions
        const lastFiveInteractions = await db.query.interactionLogTable.findMany({
-            limit: 5,
+            limit: 10,
             orderBy: (interactionLog, { desc }) => [desc(interactionLog.time)],
         });
         return res.send(lastFiveInteractions);
