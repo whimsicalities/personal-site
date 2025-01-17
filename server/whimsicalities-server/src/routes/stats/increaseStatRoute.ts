@@ -3,12 +3,15 @@ import { WhimsicalitiesRedisClient } from "../../types/WhimsicalitiesRedisClient
 import e from 'express';
 import isPetStat from "./helpers/isPetStat";
 import { WhimsicalitiesIo } from "../../types/WhimsicalitiesIo";
+import { NodePgClient, NodePgDatabase } from "drizzle-orm/node-postgres";
+import { interactionLogTable } from "../../postgresDb/schema";
 
 export default function increaseStatRoute(
   app: e.Express,
   io: WhimsicalitiesIo,
   corsOptions: CorsOptions,
   redisClient: WhimsicalitiesRedisClient,
+  db: NodePgDatabase<Record<string, never>> & { $client: NodePgClient }
 ) {
     app.post('/stats/increase', cors(corsOptions), async (req, res) => {
       let stat = req.body?.stat;
@@ -20,9 +23,12 @@ export default function increaseStatRoute(
       try {
         const statValue = Number(await redisClient.get(stat));
         if (statValue < 100) {
-          await redisClient.incr(stat);
-          io.emit(stat, statValue + 1);
-          console.log(`Increased stat to ${statValue + 1}`);
+          const newValue = await redisClient.incr(stat);
+          io.emit(stat, newValue);
+          console.log(`Increased stat to ${newValue} from ${statValue}`);
+          await db.insert(interactionLogTable).values({
+            message: "interacted",
+          });
         }
       } catch (e) {
         console.log(`Failed to decrement stat ${stat}. Error ${e}`);

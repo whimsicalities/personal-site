@@ -11,10 +11,15 @@ import doStatDecayForever from './statDecay/doStatDecayForever';
 import readSecrets from './config/readSecrets';
 import loadEnvironmentConfig from './config/loadEnvironmentConfig';
 import { exit } from 'process';
+import { drizzle } from 'drizzle-orm/node-postgres';
+import 'dotenv/config';
 
 const main = async () => {
   const config = loadEnvironmentConfig();
   const secrets = await readSecrets();
+
+  // Postgres connction
+  const db = drizzle(process.env.DATABASE_URL!); // TODO Temp! Roll into config.
 
   const app = express();
   // Creating the server ourselves rather than letting express create it
@@ -60,7 +65,7 @@ const main = async () => {
   doStatDecayForever(config.decaySpeedSeconds, redisClient, io);
 
   // Set up routes
-  increaseStatRoute(app, io, corsOptions, redisClient);
+  increaseStatRoute(app, io, corsOptions, redisClient, db);
   getStatRoute(app, corsOptions, redisClient);
   app.get('/healthcheck', cors(corsOptions), (req, res) => {
     res.send(true);
