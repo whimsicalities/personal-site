@@ -5,13 +5,14 @@ import isPetStat from "./helpers/isPetStat";
 import { WhimsicalitiesIo } from "../../types/WhimsicalitiesIo";
 import { NodePgClient, NodePgDatabase } from "drizzle-orm/node-postgres";
 import { interactionLogTable } from "../../postgresDb/schema";
+import { WhimsicalitiesDatabase } from "../../types/WhimsicalitiesDatabase";
 
 export default function increaseStatRoute(
   app: e.Express,
   io: WhimsicalitiesIo,
   corsOptions: CorsOptions,
   redisClient: WhimsicalitiesRedisClient,
-  db: NodePgDatabase<Record<string, never>> & { $client: NodePgClient }
+  db: WhimsicalitiesDatabase
 ) {
     app.post('/stats/increase', cors(corsOptions), async (req, res) => {
       let stat = req.body?.stat;

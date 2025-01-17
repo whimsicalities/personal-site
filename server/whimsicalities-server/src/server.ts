@@ -12,14 +12,16 @@ import readSecrets from './config/readSecrets';
 import loadEnvironmentConfig from './config/loadEnvironmentConfig';
 import { exit } from 'process';
 import { drizzle } from 'drizzle-orm/node-postgres';
+import * as schema from './postgresDb/schema';
 import 'dotenv/config';
+import getInteractionLogRoute from './routes/getInteractionLogRoute';
 
 const main = async () => {
   const config = loadEnvironmentConfig();
   const secrets = await readSecrets();
 
   // Postgres connction
-  const db = drizzle(process.env.DATABASE_URL!); // TODO Temp! Roll into config.
+  const db = drizzle(process.env.DATABASE_URL!, { schema }); // TODO Temp! Roll into config.
 
   const app = express();
   // Creating the server ourselves rather than letting express create it
@@ -67,6 +69,7 @@ const main = async () => {
   // Set up routes
   increaseStatRoute(app, io, corsOptions, redisClient, db);
   getStatRoute(app, corsOptions, redisClient);
+  getInteractionLogRoute(app, corsOptions, db);
   app.get('/healthcheck', cors(corsOptions), (req, res) => {
     res.send(true);
   });
