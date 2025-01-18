@@ -3,7 +3,6 @@ import { WhimsicalitiesRedisClient } from "../../types/WhimsicalitiesRedisClient
 import e from 'express';
 import isPetStat from "./helpers/isPetStat";
 import { WhimsicalitiesIo } from "../../types/WhimsicalitiesIo";
-import { NodePgClient, NodePgDatabase } from "drizzle-orm/node-postgres";
 import { interactionLogTable } from "../../postgresDb/schema";
 import { WhimsicalitiesDatabase } from "../../types/WhimsicalitiesDatabase";
 
