@@ -40,6 +40,13 @@
             "configurations": [
                 "Launch Server"
             ]
-        }
+        },
+        {
+            "name": "Run client and server only",
+            "configurations": [
+                "Launch Client",
+                "Launch Server"
+            ]
+        },
     ]
 }
