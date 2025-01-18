@@ -1,19 +1,21 @@
 <div id="site" class="grid">
-    <div class="header">
-        <app-title></app-title>
-        <hr class="solid">
-    </div>
-    <div class="content">
-        <div class="flex-container">
-            <div class="flex-item" id="pet-interaction-interface">
-                <app-pet-interaction-interface></app-pet-interaction-interface>
-                <app-healthcheck></app-healthcheck>
-            </div>
-            <div class="flex-item" id="pet">
-                <app-pet></app-pet>
-            </div>
-            <div class="flex-item" id="interaction-log">
-                <app-interaction-log></app-interaction-log>
+    <div id="site-container-column">
+        <div class="header">
+            <app-title></app-title>
+            <hr class="solid">
+        </div>
+        <div class="content">
+            <div class="flex-container">
+                <div class="flex-item" id="pet-interaction-interface">
+                    <app-pet-interaction-interface></app-pet-interaction-interface>
+                    <app-healthcheck></app-healthcheck>
+                </div>
+                <div class="flex-item" id="pet">
+                    <app-pet></app-pet>
+                </div>
+                <div class="flex-item" id="interaction-log">
+                    <app-interaction-log></app-interaction-log>
+                </div>
             </div>
         </div>
     </div>
