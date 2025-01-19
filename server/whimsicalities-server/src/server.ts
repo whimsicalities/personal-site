@@ -15,6 +15,8 @@ import { drizzle } from 'drizzle-orm/node-postgres';
 import * as schema from './postgresDb/schema';
 import 'dotenv/config';
 import getInteractionLogRoute from './routes/getInteractionLogRoute';
+import InteractionLogCache from './caches/InteractionLogCache';
+import EventEmitter from 'events';
 
 const main = async () => {
   const config = loadEnvironmentConfig();
@@ -66,10 +68,13 @@ const main = async () => {
   const redisClient = await connectToRedis();
   doStatDecayForever(config.decaySpeedSeconds, redisClient, io);
 
+  const interactionUpdateEmitter = new EventEmitter();
+  const interactionLogCache = await InteractionLogCache.CreateInteractionLogCache(db, interactionUpdateEmitter);
+
   // Set up routes
-  increaseStatRoute(app, io, corsOptions, redisClient, db);
+  increaseStatRoute(app, io, corsOptions, redisClient, db, interactionUpdateEmitter);
   getStatRoute(app, corsOptions, redisClient);
-  getInteractionLogRoute(app, corsOptions, db);
+  getInteractionLogRoute(app, corsOptions, interactionLogCache);
   app.get('/healthcheck', cors(corsOptions), (req, res) => {
     res.send(true);
   });

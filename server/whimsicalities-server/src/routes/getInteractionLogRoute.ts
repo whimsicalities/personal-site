@@ -1,21 +1,15 @@
 import cors, { CorsOptions } from "cors";
 import e from 'express';
-import { WhimsicalitiesDatabase } from "../types/WhimsicalitiesDatabase";
+import InteractionLogCache from "../caches/InteractionLogCache";
 
 
 export default function getInteractionLogRoute(
     app: e.Express,
     corsOptions: CorsOptions,
-    db: WhimsicalitiesDatabase
+    interactionLogCache: InteractionLogCache,
 ) {
     app.get("/interaction-log", cors(corsOptions), async (_, res) => {
-        // TODO - could hold a cache that listens to the websocket for when to update
-
-        // Get the most recent 5 interactions
-       const lastFiveInteractions = await db.query.interactionLogTable.findMany({
-            limit: 10,
-            orderBy: (interactionLog, { desc }) => [desc(interactionLog.time)],
-        });
+       const lastFiveInteractions = interactionLogCache.lastFiveInteractions;
         return res.send(lastFiveInteractions);
     });
 }
