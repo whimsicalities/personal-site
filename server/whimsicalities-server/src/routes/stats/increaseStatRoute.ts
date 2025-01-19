@@ -27,7 +27,7 @@ export default function increaseStatRoute(
           io.emit(stat, newValue);
           console.log(`Increased stat to ${newValue} from ${statValue}`);
           await db.insert(interactionLogTable).values({
-            message: "interacted",
+            message: `increased ${stat} to ${newValue}`,
           });
         }
       } catch (e) {
