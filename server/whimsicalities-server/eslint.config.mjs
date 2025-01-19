@@ -16,5 +16,6 @@ export default tseslint.config({
   rules: {
     "@typescript-eslint/no-explicit-any": 'off',
     "@stylistic/semi": ["warn"],
+    "@typescript-eslint/no-for-in-array": "error"
   }
 });

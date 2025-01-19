@@ -35,5 +35,6 @@ export default tseslint.config({
         },
       ],
     "@stylistic/semi": ["warn"],
+    "@typescript-eslint/no-for-in-array": "error"
   },
 });
