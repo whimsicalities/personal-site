@@ -1,5 +1,5 @@
 export default interface InteractionLog {
-    log_id: string;
-    time: string;
+    logId: string;
+    time: Date;
     message: string;
 }

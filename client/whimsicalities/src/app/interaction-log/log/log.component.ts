@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
 import InteractionLog from '../InteractionLog';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-log',
   standalone: true,
-  imports: [],
+  imports: [ DatePipe ],
   templateUrl: './log.component.html',
   styleUrl: './log.component.scss'
 })

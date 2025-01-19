@@ -73,9 +73,9 @@ export class PetInteractionInterfaceComponent implements OnInit {
     this.funValue$ = this.petStatService.getStat(PetStat.Fun);
     this.funValue$.subscribe(
       (value) => {
-        this.funBarPercentage = value
+        this.funBarPercentage = value;
       }
-    )
+    );
   }
 
   feedClick(): void {
