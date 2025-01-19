@@ -21,7 +21,7 @@ const main = async () => {
   const secrets = await readSecrets();
 
   // Postgres connction
-  const db = drizzle(process.env.DATABASE_URL!, { schema }); // TODO Temp! Roll into config.
+  const db = drizzle(secrets.postgresUrl, { schema });
 
   const app = express();
   // Creating the server ourselves rather than letting express create it

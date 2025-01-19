@@ -9,7 +9,7 @@ export default async function readSecrets(): Promise<Secrets> {
     }
     const data = await fs.readFile(secretsPath, 'utf8');
     const parsedData: Secrets = JSON.parse(data);
-    if (!parsedData.corsOrigin) {
+    if (!parsedData.corsOrigin || !parsedData.postgresUrl) {
         throw new Error("Secrets missing");
     }
     return parsedData;
