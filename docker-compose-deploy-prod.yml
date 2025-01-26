@@ -13,6 +13,7 @@ services:
           condition: service_healthy
       links:
         - redis
+        - postgres
       environment:
         SECRETS_PATH: "/run/secrets/secrets.json" # A file will be created that contains the secrets
         PORT: 3000
@@ -31,9 +32,26 @@ services:
         retries: 10
       volumes:
         - redis_data:/data
+    postgres:
+      image: "postgres:17"
+      restart: always
+      environment:
+        POSTGRES_PASSWORD: $POSTGRES_PASSWORD # From .env file
+      volumes:
+        - postgres_data:/var/lib/postgresql/data
+      ports:
+        - "5432:5432" # Access to 5432 should be ip-restricted
+    postgres-adminer:
+      image: adminer
+      restart: always
+      ports:
+        - 8080:8080 # Access to 8080 should be ip-restricted
+      links:
+        - postgres
 
 volumes:
   redis_data:
+  postgres_data:
 
 secrets:
   secrets_json:

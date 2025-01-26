@@ -13,6 +13,7 @@ services:
           condition: service_healthy
       links:
         - redis
+        - postgres
       environment:
         SECRETS_PATH: "/run/secrets/secrets.json"
         PORT: 3000
