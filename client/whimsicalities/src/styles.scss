@@ -1,7 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: Miracode;
+    src: url("/assets/fonts/Miracode.ttf") format('truetype')
+}
 
 body {
     margin: 0px; // Clear the default 8px margin
+    font-family: "Trebuchet MS", Helvetica, sans-serif
+}
+
+h1,h2,h3 {
+    font-family: Miracode, Monospace
 }
 
 // For html debugging purposes
