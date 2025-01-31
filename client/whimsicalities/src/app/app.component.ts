@@ -1,10 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { HealthcheckComponent } from './healthcheck/healthcheck.component';
-import { PetComponent } from './pet/pet.component';
 import { TitleComponent } from './title/title.component';
-import { PetInteractionInterfaceComponent } from './pet-interaction-interface/pet-interaction-interface.component';
-import { InteractionLogComponent } from "./interaction-log/interaction-log.component";
 import { NavigationBarComponent } from "./navigation-bar/navigation-bar.component";
 
 @Component({
@@ -12,11 +8,7 @@ import { NavigationBarComponent } from "./navigation-bar/navigation-bar.componen
   standalone: true,
   imports: [
     RouterOutlet,
-    HealthcheckComponent,
-    PetComponent,
     TitleComponent,
-    PetInteractionInterfaceComponent,
-    InteractionLogComponent,
     NavigationBarComponent
 ],
   templateUrl: './app.component.html',

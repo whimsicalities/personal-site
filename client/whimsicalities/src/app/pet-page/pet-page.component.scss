@@ -1,0 +1,29 @@
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.flex-pet-and-interface {
+    flex: 3; // This is within the flex-container
+
+    // But it is also its own flexbox, in order
+    // to wrap the interface below the pet.
+    display: flex;
+    flex-wrap: wrap-reverse;
+}
+
+#pet-interaction-interface {
+    flex: 1;
+    padding: 2em;
+    min-width: 10em;
+}
+
+#pet {
+    flex: 2;
+    min-width: 30em;
+}
+
+#interaction-log {
+    flex: 2;
+    min-width: 20em;
+}
