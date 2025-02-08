@@ -14,16 +14,32 @@
 
 #pet-interaction-interface {
     flex: 1;
-    padding: 2em;
-    min-width: 10em;
+    min-width: 100%;
+    // Pad less when screen real estate is worth more
+    padding: 1em;
+    @media only screen and (min-width: 15em) {
+        min-width: 10em;
+    }
+    @media only screen and (min-width: 30em) {
+        padding: 2em;
+    }
 }
 
 #pet {
     flex: 2;
-    min-width: 30em;
+    min-width: 100%;
+    @media only screen and (min-width: 25em) {
+        min-width: 20em;
+    }
+    @media only screen and (min-width: 35em) {
+        min-width: 30em;
+    }
 }
 
 #interaction-log {
-    flex: 2;
-    min-width: 20em;
+    flex: 2; // This is within the flex-container
+    min-width: 100%;
+    @media only screen and (min-width: 25em) {
+        min-width: 20em;
+    }
 }
