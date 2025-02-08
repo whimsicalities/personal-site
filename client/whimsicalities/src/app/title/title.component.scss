@@ -1,5 +1,8 @@
 #title {
     padding-right: 0.5em;
+    @media only screen and (max-width: 30em) {
+        font-size: 100%;
+    }
 }
 
 a {
