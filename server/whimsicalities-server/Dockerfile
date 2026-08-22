@@ -1,4 +1,4 @@
-FROM node:20-alpine
+FROM node:22-alpine
 # Consume arg into the build scope
 # Create these directories so that our permissions are correct later
 RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app

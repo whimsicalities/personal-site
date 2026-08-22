@@ -3,7 +3,7 @@
 # Run with --build-arg option for other environments eg production
 ARG CONFIGURATION=development
 
-FROM node:20-alpine AS build
+FROM node:22-alpine AS build
 ARG CONFIGURATION
 RUN mkdir /home/node/app
 WORKDIR /home/node/app
