@@ -23,10 +23,10 @@
     width: 100%; // For small screens, just fill the screen
     margin-left: auto;
     margin-right: auto;
+    background-color: white;
     @media only screen and (min-width: 75em) {
         max-width: 75em; // For desktop, create a column for content
     }
-    background-color: white;
 }
 
 #site {
