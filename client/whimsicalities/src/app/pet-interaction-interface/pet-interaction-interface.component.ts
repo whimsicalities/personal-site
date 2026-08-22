@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faAppleWhole } from '@fortawesome/free-solid-svg-icons';
 import { faFaceLaughBeam } from '@fortawesome/free-solid-svg-icons';
@@ -18,7 +18,10 @@ import { environment } from '../../environments/environment';
     StatBarComponent,
   ],
   templateUrl: './pet-interaction-interface.component.html',
-  styleUrl: './pet-interaction-interface.component.scss'
+  styleUrl: './pet-interaction-interface.component.scss',
+  // Use the changeDetection style that was default before angular 22 so that the bars
+  // refresh even if you don't interact with them
+  changeDetection: ChangeDetectionStrategy.Eager
 })
 export class PetInteractionInterfaceComponent implements OnInit {
   private petStatService = inject(PetStatService);
