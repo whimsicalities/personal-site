@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import InteractionLog from './InteractionLog';
 import { LogComponent } from './log/log.component';
 import { Observable } from 'rxjs';
@@ -14,7 +14,8 @@ import { PetStat } from '../services/pet-stat/PetStat';
     LogComponent
   ],
   templateUrl: './interaction-log.component.html',
-  styleUrl: './interaction-log.component.scss'
+  styleUrl: './interaction-log.component.scss',
+  changeDetection: ChangeDetectionStrategy.Eager // Required for logs to show up
 })
 export class InteractionLogComponent implements OnInit {
   private interactionLogService = inject(InteractionLogService);
