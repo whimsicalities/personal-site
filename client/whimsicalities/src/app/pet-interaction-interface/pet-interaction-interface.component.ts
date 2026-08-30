@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faAppleWhole } from '@fortawesome/free-solid-svg-icons';
 import { faFaceLaughBeam } from '@fortawesome/free-solid-svg-icons';
@@ -19,12 +19,10 @@ import { environment } from '../../environments/environment';
   ],
   templateUrl: './pet-interaction-interface.component.html',
   styleUrl: './pet-interaction-interface.component.scss',
-  // Use the changeDetection style that was default before angular 22 so that the bars
-  // refresh even if you don't interact with them
-  changeDetection: ChangeDetectionStrategy.Eager
 })
 export class PetInteractionInterfaceComponent implements OnInit {
   private petStatService = inject(PetStatService);
+  private changeDetectorRef = inject(ChangeDetectorRef);
 
   faAppleWhole = faAppleWhole;
   faFaceLaughBeam = faFaceLaughBeam;
@@ -50,10 +48,12 @@ export class PetInteractionInterfaceComponent implements OnInit {
     const socket = io(environment.serverUrl);
     socket.on(PetStat[PetStat.Food], (newValue) => {
       this.foodBarPercentage = newValue;
+      this.changeDetectorRef.markForCheck();
       console.log(`Recieved ${newValue} from food websocket`);
     });
     socket.on(PetStat[PetStat.Fun], (newValue) => {
       this.funBarPercentage = newValue;
+      this.changeDetectorRef.markForCheck();
       console.log(`Recieved ${newValue} from fun websocket`);
     });
   }
@@ -68,6 +68,7 @@ export class PetInteractionInterfaceComponent implements OnInit {
     this.foodValue$.subscribe(
       (value) => {
         this.foodBarPercentage = value;
+        this.changeDetectorRef.markForCheck();
       }
     );
   }
@@ -77,6 +78,7 @@ export class PetInteractionInterfaceComponent implements OnInit {
     this.funValue$.subscribe(
       (value) => {
         this.funBarPercentage = value;
+        this.changeDetectorRef.markForCheck();
       }
     );
   }

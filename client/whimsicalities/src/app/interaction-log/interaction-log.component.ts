@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import InteractionLog from './InteractionLog';
 import { LogComponent } from './log/log.component';
 import { Observable } from 'rxjs';
@@ -15,10 +15,10 @@ import { PetStat } from '../services/pet-stat/PetStat';
   ],
   templateUrl: './interaction-log.component.html',
   styleUrl: './interaction-log.component.scss',
-  changeDetection: ChangeDetectionStrategy.Eager // Required for logs to show up
 })
 export class InteractionLogComponent implements OnInit {
   private interactionLogService = inject(InteractionLogService);
+  private changeDetectorRef = inject(ChangeDetectorRef);
 
   interactions$!: Observable<InteractionLog[]>;
 
@@ -40,6 +40,7 @@ export class InteractionLogComponent implements OnInit {
     this.interactions$.subscribe(
       (value) => {
         this.logs = value;
+        this.changeDetectorRef.markForCheck();
       }
     );
   }
