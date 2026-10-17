@@ -1,3 +1,3 @@
 export const environment = {
-    serverUrl: 'http://site.whimsicalities.xyz:3000',
+    serverUrl: 'https://site.whimsicalities.xyz:3000',
 };

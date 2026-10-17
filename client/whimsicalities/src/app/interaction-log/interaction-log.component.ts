@@ -26,7 +26,9 @@ export class InteractionLogComponent implements OnInit {
    * On any websocket stat updates, pull logs again
    */
   socketConnect(): void {
-    const socket = io(environment.serverUrl);
+    const socket = io(environment.serverUrl, {
+      path: '/api/socket.io'
+    });
     socket.on(PetStat[PetStat.Food], () => {
       this.refreshLogs();
     });

@@ -18,7 +18,7 @@ export class InteractionLogService {
   constructor(private http: HttpClient) {}
 
   getInteractionLog(): Observable<InteractionLog[]> {
-    return this.http.get<InteractionLogResponse>(`${environment.serverUrl}/interaction-log`)
+    return this.http.get<InteractionLogResponse>(`${environment.serverUrl}/api/interaction-log`)
       .pipe(
         map(response => {
           return response.map(log => {

@@ -8,7 +8,7 @@ export default function getInteractionLogRoute(
     corsOptions: CorsOptions,
     interactionLogCache: InteractionLogCache,
 ) {
-    app.get("/interaction-log", cors(corsOptions), async (_, res) => {
+    app.get("/api/interaction-log", cors(corsOptions), async (_, res) => {
        const lastFiveInteractions = interactionLogCache.lastFiveInteractions;
         return res.send(lastFiveInteractions);
     });

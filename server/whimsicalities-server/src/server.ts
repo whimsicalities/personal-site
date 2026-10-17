@@ -30,6 +30,7 @@ const main = async () => {
   // will let us also run the websocket on the same port
   const server = createServer(app);
   const io = new Server(server, {
+    path: "/api/socket.io",
     cors: {
       origin: secrets.corsOrigin,
       methods: ["GET", "POST"]
@@ -75,7 +76,7 @@ const main = async () => {
   increaseStatRoute(app, io, corsOptions, redisClient, db, interactionUpdateEmitter);
   getStatRoute(app, corsOptions, redisClient);
   getInteractionLogRoute(app, corsOptions, interactionLogCache);
-  app.get('/healthcheck', cors(corsOptions), (req, res) => {
+  app.get('/api/healthcheck', cors(corsOptions), (req, res) => {
     res.send(true);
   });
   server.listen(port, async () => {

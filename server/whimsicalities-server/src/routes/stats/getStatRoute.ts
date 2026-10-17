@@ -8,7 +8,7 @@ export default function getStatRoute(
   corsOptions: CorsOptions,
   redisClient: WhimsicalitiesRedisClient,
 ) {
-    app.get('/stats/:stat', cors(corsOptions), async (req, res) => {
+    app.get('/api/stats/:stat', cors(corsOptions), async (req, res) => {
       const stat = req.params.stat;
       if (!isPetStat(stat)) {
         return res.status(400).end("Not a valid stat");

@@ -3,7 +3,7 @@ services:
     client:
       image: "whimsicalities/personal-site:whimsicalities-client"
       ports:
-        - "80:80"
+        - "127.0.0.1:8080:80"
     server:
       image: "whimsicalities/personal-site:whimsicalities-server"
       ports:
@@ -40,12 +40,12 @@ services:
       volumes:
         - postgres_data:/var/lib/postgresql/data
       ports:
-        - "5432:5432" # Access to 5432 should be ip-restricted
+        - "127.0.0.1:5432:5432"
     postgres-adminer:
       image: adminer
       restart: always
       ports:
-        - 8080:8080 # Access to 8080 should be ip-restricted
+        - "127.0.0.1:8081:8080"
       links:
         - postgres
 

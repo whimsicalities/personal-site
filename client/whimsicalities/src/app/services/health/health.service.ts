@@ -10,6 +10,6 @@ export class HealthService {
   constructor(private http: HttpClient) { }
 
   healthCheck(): Observable<boolean> {
-    return this.http.get<boolean>(environment.serverUrl+'/healthcheck')
+    return this.http.get<boolean>(environment.serverUrl+'/api/healthcheck');
   }
 }

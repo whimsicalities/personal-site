@@ -8,7 +8,7 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root'
 })
 export class PetStatService {
-  private urlBase = environment.serverUrl+'/stats';
+  private urlBase = environment.serverUrl+'/api/stats';
 
   constructor(private http: HttpClient) {}
 
@@ -25,7 +25,7 @@ export class PetStatService {
       }
     ).pipe(
       tap(() => {
-        console.log('Increased stat')
+        console.log('Increased stat');
       }),
       catchError((error) => {
         console.log(error);

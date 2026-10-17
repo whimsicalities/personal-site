@@ -15,7 +15,7 @@ export default function increaseStatRoute(
   db: WhimsicalitiesDatabase,
   interactionUpdateEmitter: EventEmitter,
 ) {
-    app.post('/stats/increase', cors(corsOptions), async (req, res) => {
+    app.post('/api/stats/increase', cors(corsOptions), async (req, res) => {
       let stat = req.body?.stat;
       // Stat ought to be a number, which needs to be stringified to use as a redis key
       stat = stat.toString();
