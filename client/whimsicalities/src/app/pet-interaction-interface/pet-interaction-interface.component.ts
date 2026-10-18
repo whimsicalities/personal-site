@@ -45,7 +45,12 @@ export class PetInteractionInterfaceComponent implements OnInit {
    * Websocket connection to recieve updates
    */
   socketConnect(): void {
-    const socket = io(environment.serverUrl);
+    const socket = io(
+      environment.serverUrl,
+      {
+        path: '/api/socket.io'
+      },
+    );
     socket.on(PetStat[PetStat.Food], (newValue) => {
       this.foodBarPercentage = newValue;
       this.changeDetectorRef.markForCheck();
